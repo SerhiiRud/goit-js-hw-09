@@ -26,6 +26,7 @@ function promiseHandle(event) {
   const firstDelay = Number(refs.delayEl.value);
   const step = Number(refs.stepEl.value);
   const amount = Number(refs.amountEl.value);
+
   for (let i = 1; i <= amount; i++) {
     const delay = firstDelay + step * (i - 1);
     createPromise(i, delay)
@@ -36,6 +37,9 @@ function promiseHandle(event) {
         Notiflix.Notify.failure(`❌ Rejected promise ${i} in ${delay}ms`);
       });
   }
+  setTimeout(() => {
+    refs.formEl.reset();
+  }, firstDelay + step * amount);
 }
 
 refs.buttonEl.addEventListener('click', promiseHandle);
